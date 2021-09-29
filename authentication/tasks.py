@@ -13,7 +13,7 @@ from requests import get
 
 @shared_task(bind=True)
 def helper(self,uuid):
-    print("shubham")
+    print("data saving is inprocess")
     ip_address = get('https://api.ipify.org').text 
     request_url = 'https://geolocation-db.com/jsonp/' + ip_address
     response = requests.get(request_url)
@@ -21,8 +21,9 @@ def helper(self,uuid):
     result = result.split("(")[1].strip(")")
     result  = json.loads(result)
     countryy = result['country_code']
-    # date = datetime.datetime.now().date()
-    date = datetime.date(2021, 1, 14)
+    date = datetime.datetime.now().date()
+    # if we comment 24 line and uncomment 26line and runserver with celery worker so we can see how holidaytable data will saved 
+    # date = datetime.date(2021, 1, 14)
     yearr = int(date.strftime('%Y'))
     dateList = holidays.CountryHoliday(countryy, years=yearr)
     if date in dateList:

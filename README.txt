@@ -4,6 +4,7 @@
 ```
 pip install -r requirements.txt
 ```
+pip install holidays
 
 ## Run Following commands to migrate models into db:
 ```
